@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+/* fonts */
+
+body {
+  font-family: monospace;
+}
+
+body * {
+  font-size: 1rem;
+}
+
+button {
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+h1, a {
+  font-family: times;
+  text-transform: capitalize;
+}
+
+input {
+  font-family: arial;
+  font-weight: bold;
+}
+
+/* basic styles */
+
+body {
+  margin: 5px;
+  border: 3px solid black;
+  width: calc(100vw - 10px);
+  height: calc(100vh - 10px);
+  box-shadow: 3px solid black;
+}
+
+button {
+  border: 0;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: calc(0.5rem + 3px);
+  margin: 0 0.5rem;
+}
+
+button:hover {
+  color: black;
+  background-color: white;
+  box-shadow: 6px 6px 0 black;
+  border: 3px solid black;
+  padding: 0.5rem;
+  transition: box-shadow 0.1s ease-in;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+input {
+  border: 0;
+  border-bottom: 3px solid black;
+  box-shadow: 6px 6px 0 black;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input:focus {
+  outline: 0;
+  border: 3px solid black;
+  padding: calc(0.5rem - 3px) calc(0.5rem - 3px) calc(0.5rem);
+}
+
+ul {
+  text-align: left;
+}

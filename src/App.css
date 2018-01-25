@@ -1,0 +1,24 @@
+.App {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-logo {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+}
+
+.App-logo img {
+  width: 75%;
+}
+
+.App-credits {
+  position: absolute;
+  bottom: 12px;
+  right: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

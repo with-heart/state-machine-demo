@@ -17,18 +17,18 @@ class FiniteMachine extends React.Component {
     }
   }
 
-  transition = action => {
+  transition = (action, data) => {
     if (this.state.log) {
       const { id } = this.state
-      const { type, data } = action
-      console.log(id, type, data)
+      console.log(id, action, data)
     }
 
-    const machineAction = action.type.slice(action.type.lastIndexOf('.') + 1)
     this.setState(state => ({
-      machineState: state.machine.transition(state.machineState, machineAction)
-        .value,
-      data: state.reducer(state.data, action),
+      machineState: state.machine.transition(state.machineState, action).value,
+      data: state.reducer(state.data, {
+        type: `${state.machineState}.${action}`,
+        data,
+      }),
     }))
   }
 

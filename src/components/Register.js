@@ -119,7 +119,13 @@ const StepBox = ({ header, body, input, buttons }) => (
     <h1>{header}</h1>
     <p>{body}</p>
     {(input || buttons) && (
-      <form onSubmit={e => e.preventDefault()}>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          e.stopPropagation()
+          return
+        }}
+      >
         {input}
         <div>{buttons}</div>
       </form>

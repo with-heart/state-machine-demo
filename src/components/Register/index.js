@@ -1,7 +1,14 @@
 import React from 'react'
 import { FiniteMachine, Switch, Match } from 'components/machine'
 import Progress from './Progress'
-import { GettingStarted, Username, Password, Email, Summary } from './StepBox'
+import {
+  GettingStarted,
+  Username,
+  Password,
+  Email,
+  Summary,
+  End,
+} from './pieces'
 import './index.css'
 
 const chart = {
@@ -31,7 +38,12 @@ const chart = {
         BACK: 'password',
       },
     },
-    summary: {},
+    summary: {
+      on: {
+        NEXT: 'end',
+      },
+    },
+    end: {},
   },
 }
 
@@ -100,8 +112,12 @@ const RegisterMachine = () => (
           />
           <Match
             state="summary"
-            render={({ data }) => <Summary data={data} />}
+            render={({ data, transition }) => (
+              <Summary data={data} onNext={() => transition('NEXT')} />
+            )}
           />
+
+          <Match state="end" render={() => <End />} />
         </Switch>
       </div>
     )}

@@ -10,7 +10,7 @@ A simple implementation of a state machine in React using [xstate](https://githu
 
 ## View Demo
 
-https://state-machine-hfensvarev.now.sh
+https://state-machine-yzgnuxxwmg.now.sh/
 
 ## Created By
 

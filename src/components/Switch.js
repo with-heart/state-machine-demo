@@ -15,6 +15,7 @@ class Switch extends React.Component {
       child =>
         child.props.state === this.props.machine.state &&
         React.cloneElement(child, {
+          data: this.props.machine.data,
           transition: this.transition,
         }),
     )

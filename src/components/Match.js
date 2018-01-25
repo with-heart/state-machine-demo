@@ -1,5 +1,3 @@
-import React from 'react'
-
-const Match = ({ state, render, transition }) => render({ transition })
+const Match = ({ render, transition, data }) => render({ data, transition })
 
 export default Match

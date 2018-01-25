@@ -196,7 +196,16 @@ const Email = ({ onBack, onNext }) => (
   />
 )
 
-const Summary = () => <StepBox header="summary" />
+const Summary = ({ data }) => (
+  <StepBox
+    header="summary"
+    body={[
+      <p>Here's your summary:</p>,
+      <p>Username: {data.username}</p>,
+      <p>Email: {data.email}</p>,
+    ]}
+  />
+)
 
 const Wrapper = styled.div`
   position: relative;
@@ -255,7 +264,10 @@ const RegisterMachine = () => (
               />
             )}
           />
-          <Match state="summary" render={({ transition }) => <Summary />} />
+          <Match
+            state="summary"
+            render={({ data }) => <Summary data={data} />}
+          />
         </Switch>
       </Wrapper>
     )}

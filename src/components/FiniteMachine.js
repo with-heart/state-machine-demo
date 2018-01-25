@@ -13,7 +13,7 @@ class FiniteMachine extends React.Component {
       machineState: props.chart.initial,
       id: props.chart.id,
       reducer: props.reducer,
-      reducerState: props.reducer(undefined, {}),
+      data: props.reducer(undefined, {}),
     }
   }
 
@@ -28,14 +28,16 @@ class FiniteMachine extends React.Component {
     this.setState(state => ({
       machineState: state.machine.transition(state.machineState, machineAction)
         .value,
-      reducerState: state.reducer(state.reducerState, action),
+      data: state.reducer(state.data, action),
     }))
   }
 
   render() {
     const { render } = this.props
+    const { machineState: state, data } = this.state
     return render({
-      state: this.state.machineState,
+      state,
+      data,
       transition: this.transition,
     })
   }

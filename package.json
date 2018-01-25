@@ -6,13 +6,15 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.0",
+    "serve": "^6.4.9",
     "xstate": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "now-start": "serve --single ./build"
   },
   "devDependencies": {
     "prop-types": "^15.6.0"

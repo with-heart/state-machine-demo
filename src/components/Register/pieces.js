@@ -83,7 +83,7 @@ export const Email = ({ value, onBack, onNext }) => (
   </div>
 )
 
-export const Summary = ({ username, email, onNext, onStartOver }) => (
+export const Summary = ({ username, email, onNext, onBack }) => (
   <div>
     <h1>summary</h1>
     <p>here's what you entered:</p>
@@ -92,8 +92,8 @@ export const Summary = ({ username, email, onNext, onStartOver }) => (
       <li>email: {email}</li>
     </ul>
     <p>does this look correct?</p>
-    <button type="button" onClick={onStartOver}>
-      Nah; Start over
+    <button type="button" onClick={onBack}>
+      Nah; Back
     </button>
     <button type="button" onClick={onNext}>
       Yeap
@@ -101,12 +101,15 @@ export const Summary = ({ username, email, onNext, onStartOver }) => (
   </div>
 )
 
-export const End = () => (
+export const End = ({ onStartOver }) => (
   <div>
     <h1>fin.</h1>
     <p>
       you can find the source for this demo{' '}
       <a href="https://github.com/lionize/state-machine-demo">here</a>
     </p>
+    <button type="button" onClick={onStartOver}>
+      start over
+    </button>
   </div>
 )

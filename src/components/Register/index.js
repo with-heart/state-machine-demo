@@ -40,11 +40,15 @@ const chart = {
     },
     summary: {
       on: {
-        START_OVER: 'gettingStarted',
+        BACK: 'email',
         NEXT: 'end',
       },
     },
-    end: {},
+    end: {
+      on: {
+        START_OVER: 'gettingStarted',
+      },
+    },
   },
 }
 
@@ -64,7 +68,7 @@ const reducer = (state = defaultState, action = {}) => {
       return { ...state, password: data }
     case 'email.NEXT':
       return { ...state, email: data }
-    case 'summary.START_OVER':
+    case 'end.START_OVER':
       return defaultState
     default:
       return state
@@ -122,13 +126,18 @@ const RegisterMachine = () => (
               <Summary
                 username={data.username}
                 email={data.email}
-                onStartOver={() => transition('START_OVER')}
+                onBack={() => transition('BACK')}
                 onNext={() => transition('NEXT')}
               />
             )}
           />
 
-          <Match state="end" render={() => <End />} />
+          <Match
+            state="end"
+            render={({ transition }) => (
+              <End onStartOver={() => transition('START_OVER')} />
+            )}
+          />
         </Switch>
       </div>
     )}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Register from './components/Register'
+import Register from 'components/Register'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`

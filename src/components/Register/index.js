@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import FiniteMachine from './FiniteMachine'
-import Switch from './Switch'
-import Match from './Match'
+import { FiniteMachine, Switch, Match } from 'components/machine'
+import Progress from './Progress'
+import Input from './Input'
 
 const chart = {
   id: 'register',
@@ -56,32 +56,6 @@ const reducer = (state = defaultState, action = {}) => {
   }
 }
 
-const ProgressBar = styled.div`
-  background-color: ${p => p.theme.colors.light};
-  height: 15px;
-  border: ${p => p.theme.border};
-  margin-bottom: 1.5rem;
-  width: 100%;
-  z-index: 1;
-`
-const ProgressBarForeground = styled.div`
-  height: 10px;
-  background-color: ${p => p.theme.colors.dark};
-  width: ${p => p.width};
-  z-index: 1;
-  transition: width 0.5s ease-in;
-`
-const Progress = ({ machineState }) => {
-  const steps = 4
-  const step = Object.keys(chart.states).indexOf(machineState)
-  const width = step / steps * 100 + '%'
-  return (
-    <ProgressBar>
-      <ProgressBarForeground width={width} />
-    </ProgressBar>
-  )
-}
-
 const Button = styled.button.attrs({
   type: p => (p.submit ? 'submit' : 'button'),
 })`
@@ -132,25 +106,6 @@ const StepBox = ({ header, body, input, buttons }) => (
     )}
   </StepBoxWrapper>
 )
-
-const Input = styled.input.attrs({
-  autoFocus: true,
-})`
-  background-color: ${p => p.theme.colors.light};
-  border: 0;
-  border-bottom: ${p => p.theme.border};
-  color: ${p => p.theme.colors.dark};
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 0.25rem;
-  width: 350px;
-  margin-bottom: 2rem;
-
-  &:focus {
-    outline: 0;
-  }
-`
 
 const GettingStarted = ({ onNext }) => (
   <StepBox
@@ -235,7 +190,7 @@ const RegisterMachine = () => (
     reducer={reducer}
     render={machine => (
       <Wrapper>
-        <Progress machineState={machine.state} />
+        <Progress chart={chart} machineState={machine.state} />
         <Switch machine={machine}>
           <Match
             state="gettingStarted"

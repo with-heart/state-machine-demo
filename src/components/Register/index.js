@@ -1,6 +1,6 @@
 import React from 'react'
 import { FiniteMachine, Switch, Match } from 'components/machine'
-import Progress from './Progress'
+import Progress from 'components/Progress'
 import {
   GettingStarted,
   Username,

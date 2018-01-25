@@ -7,15 +7,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <a
-          className="App-logo"
-          href="https://github.com/lionize/state-machine-demo"
-        >
-          <img src={logo} />
-        </a>
+        <img className="App-logo" src={logo} alt="logo" />
         <Register />
-        <a href="https://chanchan.io/" className="App-credits">
-          by ChanChan.
+        <a href="https://github.com/lionize" className="App-credits">
+          by lionize.
         </a>
       </div>
     )

@@ -6,13 +6,10 @@
 }
 
 .App-logo {
+  width: 90px;
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 15px;
-}
-
-.App-logo img {
-  width: 75%;
 }
 
 .App-credits {

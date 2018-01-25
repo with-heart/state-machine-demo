@@ -1,43 +1,55 @@
 import React from 'react'
 import { Machine } from 'xstate'
+import PropTypes from 'prop-types'
 
 class FiniteMachine extends React.Component {
-  constructor(props) {
-    super(props)
-
-    const machine = Machine(props.chart)
-
-    this.state = {
-      log: props.log,
-      machine,
-      machineState: props.chart.initial,
-      id: props.chart.id,
-      reducer: props.reducer,
-      data: props.reducer(undefined, {}),
-    }
+  static propTypes = {
+    log: PropTypes.bool,
+    chart: PropTypes.object.isRequired,
+    reducer: PropTypes.func.isRequired,
+    render: PropTypes.func.isRequired,
   }
 
-  transition = (action, data) => {
-    if (this.state.log) {
-      const { id } = this.state
-      console.log(id, action, data)
+  machine = Machine(this.props.chart)
+
+  state = {
+    data: this.props.reducer(undefined, { type: '@init' }),
+    machineState: this.machine.config.initial,
+  }
+
+  transition = (type, newData) => {
+    const { log, chart, reducer } = this.props
+    const { data, machineState } = this.state
+
+    const nextState = this.machine.transition(machineState, type).value
+
+    const action = {
+      data: newData,
+      nextState,
+      type: `${machineState}.${type}`,
     }
 
-    this.setState(state => ({
-      machineState: state.machine.transition(state.machineState, action).value,
-      data: state.reducer(state.data, {
-        type: `${state.machineState}.${action}`,
-        data,
+    if (log) {
+      console.log(chart.id, action.type, action.data)
+    }
+
+    this.setState(
+      state => ({
+        data: reducer(data, action),
+        machineState: nextState,
       }),
-    }))
+      log
+        ? () => {
+            console.log(chart.id, this.state.machineState, this.state.data)
+          }
+        : undefined,
+    )
   }
 
   render() {
-    const { render } = this.props
-    const { machineState: state, data } = this.state
-    return render({
-      state,
-      data,
+    return this.props.render({
+      state: this.state.machineState,
+      data: this.state.data,
       transition: this.transition,
     })
   }

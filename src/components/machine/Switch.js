@@ -1,17 +1,27 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class Switch extends React.Component {
-  renderMatchChild() {
-    return React.Children.map(
-      this.props.children,
-      child =>
-        child.props.state === this.props.machine.state &&
-        React.cloneElement(child, this.props.machine),
-    )
+  static propTypes = {
+    machine: PropTypes.shape({
+      state: PropTypes.string.isRequired,
+      transition: PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   render() {
-    return this.renderMatchChild()
+    const { children, machine } = this.props
+
+    let match = null
+
+    React.Children.forEach(children, child => {
+      if (match) return
+      if (child.props.state === machine.state) {
+        match = child
+      }
+    })
+
+    return React.cloneElement(match, { machine })
   }
 }
 

@@ -17,11 +17,16 @@ export const GettingStarted = ({ onNext }) => (
   </div>
 )
 
-export const Username = ({ onBack, onNext }) => (
+export const Username = ({ value, onBack, onNext }) => (
   <div>
     <h1>username</h1>
     <p>pick your identifier</p>
-    <input autoFocus ref={ref()} onKeyPress={enter(onNext)} />
+    <input
+      autoFocus
+      ref={ref()}
+      defaultValue={value}
+      onKeyPress={enter(onNext)}
+    />
     <div>
       <button type="button" onClick={onBack}>
         Back
@@ -33,11 +38,17 @@ export const Username = ({ onBack, onNext }) => (
   </div>
 )
 
-export const Password = ({ onBack, onNext }) => (
+export const Password = ({ value, onBack, onNext }) => (
   <div>
     <h1>password</h1>
     <p>protect yourself! use a password</p>
-    <input autoFocus ref={ref()} onKeyPress={enter(onNext)} />
+    <input
+      autoFocus
+      type="password"
+      ref={ref()}
+      defaultValue={value}
+      onKeyPress={enter(onNext)}
+    />
     <div>
       <button type="button" onClick={onBack}>
         Back
@@ -49,13 +60,18 @@ export const Password = ({ onBack, onNext }) => (
   </div>
 )
 
-export const Email = ({ onBack, onNext }) => (
+export const Email = ({ value, onBack, onNext }) => (
   <div>
     <h1>email</h1>
     <p>
       how can we reach you via antiquated asynchronous messaging technology?
     </p>
-    <input autoFocus ref={ref()} onKeyPress={enter(onNext)} />
+    <input
+      autoFocus
+      ref={ref()}
+      defaultValue={value}
+      onKeyPress={enter(onNext)}
+    />
     <div>
       <button type="button" onClick={onBack}>
         Back
@@ -67,15 +83,18 @@ export const Email = ({ onBack, onNext }) => (
   </div>
 )
 
-export const Summary = ({ data, onNext }) => (
+export const Summary = ({ username, email, onNext, onStartOver }) => (
   <div>
     <h1>summary</h1>
-    <p>here's your summary:</p>
-    <ul style={{ textAlign: 'left', width: '500px', marginLeft: 'auto' }}>
-      <li>username: {data.username}</li>
-      <li>email: {data.email}</li>
+    <p>here's what you entered:</p>
+    <ul style={{ textAlign: 'left', width: '50%', margin: '0 auto' }}>
+      <li>username: {username}</li>
+      <li>email: {email}</li>
     </ul>
     <p>does this look correct?</p>
+    <button type="button" onClick={onStartOver}>
+      Nah; Start over
+    </button>
     <button type="button" onClick={onNext}>
       Yeap
     </button>

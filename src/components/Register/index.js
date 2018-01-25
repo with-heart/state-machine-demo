@@ -40,6 +40,7 @@ const chart = {
     },
     summary: {
       on: {
+        START_OVER: 'gettingStarted',
         NEXT: 'end',
       },
     },
@@ -63,6 +64,8 @@ const reducer = (state = defaultState, action = {}) => {
       return { ...state, password: data }
     case 'email.NEXT':
       return { ...state, email: data }
+    case 'summary.START_OVER':
+      return defaultState
     default:
       return state
   }
@@ -85,8 +88,9 @@ const RegisterMachine = () => (
           />
           <Match
             state="username"
-            render={({ transition }) => (
+            render={({ data: { username }, transition }) => (
               <Username
+                value={username}
                 onBack={() => transition('BACK')}
                 onNext={data => transition('NEXT', data)}
               />
@@ -94,8 +98,9 @@ const RegisterMachine = () => (
           />
           <Match
             state="password"
-            render={({ transition }) => (
+            render={({ data: { password }, transition }) => (
               <Password
+                value={password}
                 onBack={() => transition('BACK')}
                 onNext={data => transition('NEXT', data)}
               />
@@ -103,8 +108,9 @@ const RegisterMachine = () => (
           />
           <Match
             state="email"
-            render={({ transition }) => (
+            render={({ data: { email }, transition }) => (
               <Email
+                value={email}
                 onBack={() => transition('BACK')}
                 onNext={data => transition('NEXT', data)}
               />
@@ -113,7 +119,12 @@ const RegisterMachine = () => (
           <Match
             state="summary"
             render={({ data, transition }) => (
-              <Summary data={data} onNext={() => transition('NEXT')} />
+              <Summary
+                username={data.username}
+                email={data.email}
+                onStartOver={() => transition('START_OVER')}
+                onNext={() => transition('NEXT')}
+              />
             )}
           />
 
